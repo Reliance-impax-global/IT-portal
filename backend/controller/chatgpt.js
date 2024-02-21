@@ -20,7 +20,7 @@ export const handlerequest = async (req, res) => {
   console.log(req.body);
 
   try {
-    const prompt = ` Generate a  well detailed documentation on how to develop the app so that developers can be guided through it also output it in HTMl format with all the content: client apps=${req.body.apps} number of senior developers=${req.body.seniorDev}  number of junior developers=${req.body.juniorDev} number of ui ux designers=${req.body.UIUx}`;
+    const prompt = ` We have to develop a ${req.body.apps} app can you tell me what features it should have and what are best technologies to use it to make it? Also output it in HTML format`;
     const msg = await main(prompt);
     console.log(msg);
     res.status(200).json(msg);
