@@ -1,11 +1,47 @@
 /* LandingPage.css */
 @import url("https://fonts.googleapis.com/css2?family=Prompt:wght@300;700&display=swap");
-body {
-  margin: 0;
-  font-family: "Arial", sans-serif;
+
+h1 {
+  font-family: "Prompt", sans-serif;
+}
+.wrapper {
+  background: rgb(255, 253, 251);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 253, 251, 1) 0%,
+    rgba(72, 0, 255, 1) 0%,
+    rgba(49, 79, 247, 1) 15%,
+    rgba(0, 247, 231, 1) 100%
+  );
+}
+.frm {
+  transform: scaleY(0.5);
+}
+.part_right {
+  width: 70%;
+  height: 98vh;
+  position: relative;
+  /* transform: scaleY(2); */
 }
 
-.landing-page {
+.part_right::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 254, 254);
+  border-radius: 100% 0px 0px 100%;
+  transform: scaleY(2);
+}
+/* body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+} */
+
+/* .landing-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px 20px 0px 20px;
@@ -134,4 +170,4 @@ footer {
     justify-content: center;
     align-items: center;
   }
-}
+} */

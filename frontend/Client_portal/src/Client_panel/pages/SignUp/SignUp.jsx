@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import EastIcon from "@mui/icons-material/East";
 import Signup1 from "../../components/SignUpParts/Signup1";
 import Signup2 from "../../components/SignUpParts/Signup2";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../Firebase/firebase";
 import { registerUser } from "../../../Firebase/ClientFbSignup";
 import { ColorRing } from "react-loader-spinner";
 import { Navigate, useNavigate } from "react-router-dom";
@@ -27,6 +29,7 @@ const SignUp = () => {
   const [fields, setfields] = useState(FormFields);
   const { displayName, email, password, phone } = fields;
   const { user } = useSelector((state) => state.Auth);
+  const [err, seterr] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     console.log(user);
@@ -44,6 +47,33 @@ const SignUp = () => {
     await setDoc(doc(db, "Roles", id), {
       isAdmin: false,
     });
+  };
+  const signin = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        dispatch(setuser({ uid: user.uid, name: user.displayName }));
+        navigate("/projects");
+        setloading(false);
+        return user.uid;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        return error;
+      });
+  };
+  const handlesignin = async () => {
+    console.log(fields);
+    if (fields.email.length !== 0 && fields.password.length >= 6) {
+      console.log(fields);
+      setloading(true);
+      signin(fields.email, fields.password);
+    } else {
+      seterr(true);
+    }
   };
   const handleincrease = async () => {
     switch (part) {
@@ -87,7 +117,7 @@ const SignUp = () => {
               {part === 1 && (
                 <Signup1
                   handlechange={handleChange}
-                  err={errFirst}
+                  err={err}
                   fields={fields}
                 />
               )}
@@ -100,14 +130,14 @@ const SignUp = () => {
               )}
               <div className=" w-full flex justify-center items-center flex-col ">
                 <button
-                  onClick={handleincrease}
-                  className=" bg-singup_btn w-12 h-12 rounded-full text-white "
+                  onClick={handlesignin}
+                  className=" bg-singup_btn w-max py-1 px-4 rounded-full text-white "
                 >
-                  <EastIcon color="white" />
+                  Signin
                 </button>
               </div>
             </div>
-            <div className="signupStep flex w-12 absolute  justify-between items-center bottom-0 right-0">
+            {/* <div className="signupStep flex w-12 absolute  justify-between items-center bottom-0 right-0">
               <div
                 className={` w-3 h-3 rounded-full border border-singup_btn ${
                   part === 1 && " bg-singup_btn"
@@ -118,7 +148,7 @@ const SignUp = () => {
                   part === 2 && " bg-singup_btn"
                 }`}
               ></div>
-            </div>
+            </div> */}
           </div>
 
           <div className=" w-1/2 md:flex justify-center items-center hidden ">
@@ -139,12 +169,6 @@ const SignUp = () => {
           </div>
         )}
       </div>
-      <button
-        className=" bg-black text-white"
-        onClick={() => console.log(user)}
-      >
-        test
-      </button>
     </div>
   );
 };
