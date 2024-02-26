@@ -149,6 +149,19 @@ const Clientsignup = ({ change }) => {
         >
           SignUp
         </button>
+        {loading && (
+          <div className=" aflex justify-center items-center">
+            <ColorRing
+              visible={true}
+              height="50"
+              width="50"
+              ariaLabel="color-ring-loading"
+              wrapperStyle={{}}
+              wrapperClass="color-ring-wrapper"
+              colors={["#1646f5", "#1646f5", "#1646f5", "#1646f5", "#1646f5"]}
+            />
+          </div>
+        )}
       </form>
     </motion.div>
   );

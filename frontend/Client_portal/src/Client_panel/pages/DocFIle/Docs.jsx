@@ -433,6 +433,12 @@ const Docs = ({ Qo, handleCloseQo, handleOpenQo }) => {
               >
                 View result
               </button>
+              <button
+                onClick={sendrequest}
+                className=" w-max text-gray-100 bg-slate-700 px-4 py-1 mt-4"
+              >
+                Generate again
+              </button>
             </div>
           )}
         </div>

@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../Firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { setadmin, setuser } from "../../../redux/AuthSlice";
+import { ColorRing } from "react-loader-spinner";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Firebase/firebase";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +21,7 @@ const InternalLogin = () => {
   const navigate = useNavigate();
   const [adminloading, setadminloading] = useState(false);
   const [fields, setfields] = useState(FormFields);
+  const [loading, setloading] = useState(false);
   const [err, seterr] = useState(false);
   const handleChange = (e) => {
     setfields((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -122,6 +124,19 @@ const InternalLogin = () => {
         >
           Login
         </button>
+        {loading && (
+          <div className=" aflex justify-center items-center">
+            <ColorRing
+              visible={true}
+              height="50"
+              width="50"
+              ariaLabel="color-ring-loading"
+              wrapperStyle={{}}
+              wrapperClass="color-ring-wrapper"
+              colors={["#1646f5", "#1646f5", "#1646f5", "#1646f5", "#1646f5"]}
+            />
+          </div>
+        )}
       </form>
     </motion.div>
   );

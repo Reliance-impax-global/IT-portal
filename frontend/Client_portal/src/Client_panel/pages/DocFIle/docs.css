@@ -53,7 +53,7 @@ tr {
   background-color: #f1f1f1;
 }
 .docs > h1 {
-  font-size: 35px;
+  font-size: 30px;
   font-weight: bold;
   margin: 10px 0px;
   text-align: center;
@@ -81,6 +81,16 @@ tr {
 .docs > ul {
   list-style-type: square;
   margin-left: 20px;
+}
+.docs > ol > li {
+  list-style-type: square;
+  margin-left: 20px;
+  margin-top: 15px;
+}
+.docs > ul > li {
+  list-style-type: square;
+
+  margin-top: 15px;
 }
 .docStart {
   h4 {
@@ -123,7 +133,7 @@ tr {
     margin: 10px 0px;
     text-align: center;
     font-family: "IBM Plex Serif", serif;
-    display: none;
+    /* display: none; */
   }
   .docs > h2 {
     font-size: 20px;
