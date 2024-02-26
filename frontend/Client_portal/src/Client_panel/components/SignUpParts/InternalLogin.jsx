@@ -51,6 +51,7 @@ const InternalLogin = () => {
   const signinAdmin = (email, password) => {
     console.log(fields);
     if (fields.email.length !== 0 && fields.password.length >= 6) {
+      setloading(true);
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
